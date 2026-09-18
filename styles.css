@@ -1,0 +1,246 @@
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --border: #e2e5ea;
+  --text: #1c2530;
+  --muted: #7a8695;
+  --accent: #2f6df6;
+  --danger: #d93a3a;
+  --done: #98a2b3;
+  --prio-a: #d93a3a;
+  --prio-b: #e0811f;
+  --prio-c: #c9a227;
+  --prio-rest: #4a5568;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 4px 12px rgba(16, 24, 40, 0.05);
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+.app__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.app__title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.app__subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.capture {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.capture__input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  outline: none;
+}
+
+.capture__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47, 109, 246, 0.15);
+}
+
+.capture__button {
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.capture__button:hover {
+  filter: brightness(1.05);
+}
+
+.capture__button:active {
+  filter: brightness(0.95);
+}
+
+.tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.task.dragging {
+  opacity: 0.45;
+}
+
+.task.drop-target {
+  border-color: var(--accent);
+  border-style: dashed;
+}
+
+.task__handle {
+  cursor: grab;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px 2px;
+  user-select: none;
+  background: none;
+  border: none;
+}
+
+.task__handle:active {
+  cursor: grabbing;
+}
+
+.task__checkbox {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.task__priority {
+  flex: 0 0 auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  color: var(--prio-rest);
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+}
+
+.task__priority[data-priority="A"] { color: var(--prio-a); }
+.task__priority[data-priority="B"] { color: var(--prio-b); }
+.task__priority[data-priority="C"] { color: var(--prio-c); }
+
+.task__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  cursor: text;
+}
+
+.task.is-done .task__text {
+  color: var(--done);
+  text-decoration: line-through;
+}
+
+.task__edit-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  padding: 4px 6px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  outline: none;
+}
+
+.task__delete {
+  flex: 0 0 auto;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  padding: 4px 6px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.task__delete:hover {
+  color: var(--danger);
+  background: rgba(217, 58, 58, 0.08);
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 32px 16px;
+}
+
+@media (max-width: 480px) {
+  .app { padding-top: 20px; }
+  .app__title { font-size: 24px; }
+  .capture__button { padding: 12px 14px; }
+}

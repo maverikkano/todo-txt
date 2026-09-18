@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo.txt Task Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1 class="app__title">todo.txt</h1>
+      <p class="app__subtitle" id="task-count" aria-live="polite">0 tasks</p>
+    </header>
+
+    <form class="capture" id="capture-form" autocomplete="off">
+      <label class="sr-only" for="capture-input">Add a task</label>
+      <input
+        class="capture__input"
+        id="capture-input"
+        type="text"
+        placeholder="Add a task…  (A) call mum +family @phone"
+        maxlength="500"
+      />
+      <button class="capture__button" type="submit">Add</button>
+    </form>
+
+    <ul class="tasks" id="task-list" aria-label="Task list"></ul>
+
+    <p class="empty" id="empty-state" hidden>
+      No tasks yet. Type above and press Enter.
+    </p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
