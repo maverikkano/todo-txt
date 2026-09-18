@@ -2,13 +2,17 @@
   "use strict";
 
   var STORAGE_KEY = "todo-txt.tasks";
+  var THEME_KEY = "todo-txt.theme";
   var PRIORITIES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  var THEMES = ["light", "dark", "night"];
+  var DEFAULT_THEME = "light";
 
   var listEl = document.getElementById("task-list");
   var formEl = document.getElementById("capture-form");
   var inputEl = document.getElementById("capture-input");
   var emptyEl = document.getElementById("empty-state");
   var countEl = document.getElementById("task-count");
+  var themeButtons = document.querySelectorAll(".theme-switcher__button");
 
   var tasks = [];
   var dragId = null;
@@ -111,6 +115,47 @@
         task.id = uid();
         return task;
       });
+  }
+
+  // --- theme ---------------------------------------------------------------
+
+  function readTheme() {
+    var saved = null;
+    try {
+      saved = localStorage.getItem(THEME_KEY);
+    } catch (err) {
+      return DEFAULT_THEME;
+    }
+    return THEMES.indexOf(saved) !== -1 ? saved : DEFAULT_THEME;
+  }
+
+  function applyTheme(name) {
+    document.documentElement.setAttribute("data-theme", name);
+    themeButtons.forEach(function (btn) {
+      btn.setAttribute(
+        "aria-pressed",
+        btn.dataset.themeValue === name ? "true" : "false"
+      );
+    });
+  }
+
+  function setTheme(name) {
+    if (THEMES.indexOf(name) === -1) name = DEFAULT_THEME;
+    try {
+      localStorage.setItem(THEME_KEY, name);
+    } catch (err) {
+      console.error("Could not save theme:", err);
+    }
+    applyTheme(name);
+  }
+
+  function initTheme() {
+    themeButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setTheme(btn.dataset.themeValue);
+      });
+    });
+    applyTheme(readTheme());
   }
 
   // --- rendering ----------------------------------------------------------
@@ -359,6 +404,7 @@
 
   // --- boot ---------------------------------------------------------------
 
+  initTheme();
   load();
   render();
 })();

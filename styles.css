@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --bg: #f5f6f8;
   --surface: #ffffff;
   --border: #e2e5ea;
@@ -13,6 +14,40 @@
   --prio-rest: #4a5568;
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 4px 12px rgba(16, 24, 40, 0.05);
   --radius: 10px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #171b21;
+  --surface: #212832;
+  --border: #333d49;
+  --text: #e7ebf0;
+  --muted: #98a4b3;
+  --accent: #5b8dfb;
+  --danger: #f4736f;
+  --done: #6f7b89;
+  --prio-a: #ff6b6b;
+  --prio-b: #ffa94d;
+  --prio-c: #ffd43b;
+  --prio-rest: #aab4c2;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --bg: #070b16;
+  --surface: #0f1526;
+  --border: #1e2a44;
+  --text: #d7e1ff;
+  --muted: #7b89ad;
+  --accent: #7aa2ff;
+  --danger: #ff7a90;
+  --done: #5b6684;
+  --prio-a: #ff5d8f;
+  --prio-b: #ffb05c;
+  --prio-c: #f4e285;
+  --prio-rest: #95a3c7;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 
 * {
@@ -54,10 +89,17 @@ body {
 
 .app__header {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 20px;
+}
+
+.app__controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 }
 
 .app__title {
@@ -72,6 +114,39 @@ body {
   margin: 0;
   color: var(--muted);
   font-size: 13px;
+}
+
+.theme-switcher {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.theme-switcher__button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.theme-switcher__button:hover {
+  color: var(--text);
+}
+
+.theme-switcher__button[aria-pressed="true"] {
+  background: var(--accent);
+  color: #fff;
 }
 
 .capture {
@@ -209,6 +284,7 @@ body {
   font-size: 15px;
   font-family: inherit;
   color: var(--text);
+  background: var(--surface);
   padding: 4px 6px;
   border: 1px solid var(--accent);
   border-radius: 6px;

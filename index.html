@@ -10,7 +10,25 @@
   <main class="app">
     <header class="app__header">
       <h1 class="app__title">todo.txt</h1>
-      <p class="app__subtitle" id="task-count" aria-live="polite">0 tasks</p>
+      <div class="app__controls">
+        <p class="app__subtitle" id="task-count" aria-live="polite">0 tasks</p>
+        <div
+          class="theme-switcher"
+          id="theme-switcher"
+          role="group"
+          aria-label="Color theme"
+        >
+          <button type="button" class="theme-switcher__button" data-theme-value="light">
+            Light
+          </button>
+          <button type="button" class="theme-switcher__button" data-theme-value="dark">
+            Dark
+          </button>
+          <button type="button" class="theme-switcher__button" data-theme-value="night">
+            Night
+          </button>
+        </div>
+      </div>
     </header>
 
     <form class="capture" id="capture-form" autocomplete="off">
